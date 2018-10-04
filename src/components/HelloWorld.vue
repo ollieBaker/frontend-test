@@ -60,7 +60,6 @@ export default {
     beginEdit(id) {
       this.editing = id;
     },
-    edit(val, target) {},
     getUsers() {
       this.$http
         .get("https://jsonplaceholder.typicode.com/users")
@@ -77,11 +76,9 @@ export default {
           this.users[userIndex]
         )
         .then(response => {
-          console.log(response);
           this.$set(this.users, userIndex, response.data);
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
           this.editing = id;
         });
     }
