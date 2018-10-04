@@ -1,13 +1,14 @@
 <template>
   <v-container fluid>
+    <h1>A simple editable list using Vue.js & contenteditable</h1>
     <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
+      <v-layout column align-left>
         <v-list
           v-for="user in users"
           :key="user.id"
           >
-            <v-list-tile-content @click="beginEdit(user.id)">
-              <v-list-tile-sub-title>{{ user.id }}</v-list-tile-sub-title>
+            <v-list-tile-content @click="beginEdit(user.id)" :data-editing="editing === user.id">
+              <v-list-tile-sub-title>{{`User ID: ${user.id}`}}</v-list-tile-sub-title>
               <v-list-tile-sub-title 
                 v-text="user.name"
                 contenteditable="true" 
@@ -23,8 +24,13 @@
                 @blur="e => editUser(e.target, 'company.name', user.id)">
                 {{ user.company.name }}
               </v-list-tile-sub-title>
-              <v-list-tile-sub-title v-if="editing === user.id" @click="e => updateUser(e, user.id)">Send</v-list-tile-sub-title>
+              <v-slide-y-transition>
+                <v-btn v-if="editing === user.id" @click="e => updateUser(e, user.id)">Send</v-btn>
+              </v-slide-y-transition>
             </v-list-tile-content>
+             <v-divider
+              :key="user.Id"
+            ></v-divider>
         </v-list>
       </v-layout>
     </v-slide-y-transition>
@@ -99,5 +105,14 @@ li {
 }
 a {
   color: #42b983;
+}
+div[contenteditable] {
+  cursor: pointer;
+}
+div[data-editing] div[contenteditable] {
+  cursor: auto;
+}
+div[contenteditable] {
+  cursor: pointer;
 }
 </style>

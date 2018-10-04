@@ -9,7 +9,8 @@ import {
   VIcon,
   VGrid,
   VToolbar,
-  transitions
+  transitions,
+  VDivider
 } from "vuetify";
 import "vuetify/src/stylus/app.styl";
 
@@ -23,7 +24,8 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
-    transitions
+    transitions,
+    VDivider
   },
   iconfont: "md"
 });
